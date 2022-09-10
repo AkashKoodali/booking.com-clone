@@ -1,6 +1,6 @@
 import Hotel from '../models/Hotel.js';
 
-export const addHotel = async (req,res,next) => {
+export const createHotel = async (req,res,next) => {
     const { data } = req.body;
     const newHotel = new Hotel(data); 
     try {

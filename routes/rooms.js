@@ -1,9 +1,8 @@
 import express from 'express';
+import { createRoom } from '../controllers/room-controller.js';
 
 const router = express.Router();
 
-router.get("/" , (req,res)=>{
-    res.send("hello");
-});
+router.get("/:id" , createRoom);
 
 export default router;
