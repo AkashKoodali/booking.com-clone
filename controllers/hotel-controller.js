@@ -11,7 +11,7 @@ export const createHotel = async (req,res,next) => {
     }
 }
 
-export const deteteHotel =  async (req,res,next) => {
+export const deleteHotel =  async (req,res,next) => {
     const {id} = req.params;
     try {
         await Hotel.deleteOne({_id: id});

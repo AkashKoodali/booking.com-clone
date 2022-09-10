@@ -1,7 +1,7 @@
 import express from 'express';
 import { 
     createHotel, 
-    deteteHotel, 
+    deleteHotel, 
     getAllHotel, 
     getOneHotel, 
     updateHotel 
@@ -15,7 +15,7 @@ router.post("/",verifyAdmin, createHotel);
 
 router.put("/:id",verifyAdmin, updateHotel);
 
-router.delete("/:id",verifyAdmin, deteteHotel); 
+router.delete("/:id",verifyAdmin, deleteHotel); 
 
 router.get("/:id", getOneHotel); 
 
