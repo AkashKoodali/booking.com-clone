@@ -8,7 +8,6 @@
 
 .plistItem{
     flex: 1;
-    border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
 }
@@ -17,12 +16,19 @@
     width: 100%;
     height: 150px;
     object-fit: cover;
+    border-radius: 10px;
+    
 }
 
 .plistTitles>h1{
     font-size: 18px;
+    text-transform: capitalize;
 }
 .plistTitles>h2{
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 400;    
 }
+.plistTitles{
+    line-height: 10px;
+}
+    

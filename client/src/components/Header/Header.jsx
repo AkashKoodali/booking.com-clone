@@ -7,6 +7,9 @@ import {
   faCalendarDays,
   faPerson,
 } from "@fortawesome/free-solid-svg-icons";
+import { 
+  useNavigate
+} from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DateRange } from "react-date-range";
 import { useState } from "react";
@@ -16,6 +19,7 @@ import { format } from "date-fns";
 
 function Header({ type }) {
   const [openDate, setOpenDate] = useState(false);
+  const [destinastion, setDestinastion] = useState("");
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -39,6 +43,17 @@ function Header({ type }) {
       };
     });
   };
+
+  const navigate = useNavigate()
+
+
+
+  const handleSearch = () => {
+    navigate("/hotels", {state: {destinastion, date, options}})
+  }
+
+
+
   return (
     <div className="header">
       <div className={ type === "list" ? "headerContainer listMode": "headerContainer"}>
@@ -81,6 +96,7 @@ function Header({ type }) {
                   type="text"
                   placeholder="Where are you going?"
                   className="headerSearchInput"
+                  onChange={(e) => setDestinastion(e.target.value)}
                 />
               </div>
               <div className="headerSearchItem">
@@ -99,6 +115,7 @@ function Header({ type }) {
                     moveRangeOnFirstSelection={false}
                     ranges={date}
                     className="date"
+                    minDate={new Date()}
                   />
                 )}
               </div>
@@ -177,7 +194,7 @@ function Header({ type }) {
                 )}
               </div>
               <div className="headerSearchItem">
-                <button className="headerBtn">Search</button>
+                <button className="headerBtn" onClick={handleSearch}>Search</button>
               </div>
             </div>{" "}
           </>

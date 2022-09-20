@@ -8,6 +8,7 @@ import hotelsRouter from './routes/hotels.js';
 import roomsRouter from './routes/rooms.js';
 import usersRouter from "./routes/users.js";
 import cookieParser from "cookie-parser";
+import cors from 'cors'; 
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.get("/", (req,res)=>{
 });
 
 //middilewares
+app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 
