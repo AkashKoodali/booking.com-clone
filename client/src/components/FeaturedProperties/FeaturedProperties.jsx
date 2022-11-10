@@ -1,68 +1,34 @@
-import "./FeaturedProerties.css";
 import useFetch from "../../hooks/useFetch";
+import "./FeaturedProerties.css";
 
 const FeaturedProperties = () => {
-
-  const { data, loading, error } = useFetch("/hotels/countByType");
+  const { data, loading, error } = useFetch("/hotels?featured=true&limit=4");
 
   return (
     <div className="fp">
-      <div className="fpItem">
-        <img
-          src="https://images.unsplash.com/photo-1570698473651-b2de99bae12f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWFkcmlkJTJDJTIwc3BhaW58ZW58MHx8MHx8&w=1000&q=80"
-          alt="img"
-          className="fpImg"
-        />
-        <span className="fpName">ApartHotel stare Miastro</span>
-        <span className="fpCity">Madrid</span>
-        <span className="fpPrice">Starting from $120</span>
-        <div className="fpRating">
-          <button>8.9</button>
-          <span>Excellent</span>
-        </div>
-      </div>
-      <div className="fpItem">
-        <img
-          src="https://images.unsplash.com/photo-1570698473651-b2de99bae12f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWFkcmlkJTJDJTIwc3BhaW58ZW58MHx8MHx8&w=1000&q=80"
-          alt="img"
-          className="fpImg"
-        />
-        <span className="fpName">ApartHotel stare Miastro</span>
-        <span className="fpCity">Madrid</span>
-        <span className="fpPrice">Starting from $120</span>
-        <div className="fpRating">
-          <button>8.9</button>
-          <span>Excellent</span>
-        </div>
-      </div>
-      <div className="fpItem">
-        <img
-          src="https://images.unsplash.com/photo-1570698473651-b2de99bae12f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWFkcmlkJTJDJTIwc3BhaW58ZW58MHx8MHx8&w=1000&q=80"
-          alt="img"
-          className="fpImg"
-        />
-        <span className="fpName">ApartHotel stare Miastro</span>
-        <span className="fpCity">Madrid</span>
-        <span className="fpPrice">Starting from $120</span>
-        <div className="fpRating">
-          <button>8.9</button>
-          <span>Excellent</span>
-        </div>
-      </div>
-      <div className="fpItem">
-        <img
-          src="https://images.unsplash.com/photo-1570698473651-b2de99bae12f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWFkcmlkJTJDJTIwc3BhaW58ZW58MHx8MHx8&w=1000&q=80"
-          alt="img"
-          className="fpImg"
-        />
-        <span className="fpName">ApartHotel stare Miastro</span>
-        <span className="fpCity">Madrid</span>
-        <span className="fpPrice">Starting from $120</span>
-        <div className="fpRating">
-          <button>8.9</button>
-          <span>Excellent</span>
-        </div>
-      </div>
+      {loading ? (
+        "Loading"
+      ) : (
+        <>
+          { Array.isArray(data) ? data.map((item) => {
+           return <div className="fpItem" key={item._id}>
+              <img
+                src={item.photos[0]}
+                alt="Featured"
+                className="fpImg"
+              />
+              <span className="fpName">{item.name}</span>
+              <span className="fpCity">{item.city}</span>
+              <span className="fpPrice">Starting from $ {item.cheapestPrize}</span>
+              {item.rating && <div className="fpRating">
+                <button>{item.rating}</button>
+                <span>Excellent</span>
+              </div>}
+            </div>
+}): null
+} 
+        </>
+      )}
     </div>
   );
 };
