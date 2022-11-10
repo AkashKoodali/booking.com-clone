@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import "./Reserve.css";
+import {useNavigate} from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import useFetch from '../../hooks/useFetch';
@@ -43,14 +44,17 @@ const Reserve = ({ setOpen, hotelId }) => {
     }
     console.log(selectedRooms);
 
+    const navigate = useNavigate()
+
     const handleClick = async () => {
-        // try {
-        //     await Promise.all(selectedRooms.map(roomId) => {
-        //         const res = axios.put('')
-        //     })
-        // } catch (error) {
-            
-        // }
+        try {
+            await Promise.all(selectedRooms.map((roomId) => {
+                const res = axios.put(`/rooms/availability/${roomId}`, {dates: allDates});
+                return res.data
+        }));
+        setOpen(false);
+        navigate('/');
+        } catch (error) {}
     }
 
   return (
